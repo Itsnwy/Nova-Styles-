@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Styles — Alta Costura & Expresión Personal</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: #121212;
+      --bg-card-hover: #181818;
+      --accent-gold: #d4af37;
+      --accent-gold-light: #f3e5ab;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(212, 175, 55, 0.3);
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Montserrat', sans-serif;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-serif {
+      font-family: var(--font-serif);
+      font-weight: 300;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent-gold);
+      margin-bottom: 0.75rem;
+      display: block;
+      font-weight: 500;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      border: 1px solid var(--border-gold);
+      color: var(--text-primary);
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .btn:hover {
+      background: var(--accent-gold);
+      color: #000;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-pill {
+      padding: 0.8rem 2.5rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .btn-pill:hover {
+      background: var(--accent-gold);
+      color: #000;
+      border-color: var(--accent-gold);
+    }
+
+    .btn-copy {
+      border-color: var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.7rem 1.4rem;
+      font-size: 0.75rem;
+      width: 100%;
+    }
+
+    .btn-copy:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.05);
+      box-shadow: none;
+    }
+
+    .btn-copy.copied {
+      background: var(--accent-gold) !important;
+      color: #000 !important;
+      border-color: var(--accent-gold) !important;
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: rgba(18, 18, 18, 0.95);
+      border: 1px solid var(--accent-gold);
+      color: var(--text-primary);
+      padding: 1rem 1.8rem;
+      border-radius: 2px;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast i {
+      color: var(--accent-gold);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 2rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+    }
+
+    .logo-box img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      transition: var(--transition);
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background-color: var(--accent-gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 90px;
+      background: linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.98) 100%),
+                  radial-gradient(circle at 85% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 6.5vw, 5.2rem);
+      line-height: 1.05;
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent-gold);
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-image-frame {
+      position: relative;
+      border: 1px solid var(--border-gold);
+      padding: 12px;
+      background: var(--bg-card);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    }
+
+    .hero-image-frame img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      filter: contrast(105%);
+      display: block;
+    }
+
+    .ticker-wrap {
+      width: 100%;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+      padding: 1.1rem 0;
+    }
+
+    .ticker {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 25s linear infinite;
+    }
+
+    .ticker-item {
+      padding: 0 3rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .ticker-item b {
+      color: var(--accent-gold);
+      margin-right: 0.5rem;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .section-padding {
+      padding: 7rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-gold);
+      background: var(--bg-card-hover);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+    }
+
+    .card-img-wrap {
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .card-img-contain {
+      width: 85%;
+      height: 85%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.2));
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-img,
+    .card:hover .card-img-contain {
+      transform: scale(1.06);
+    }
+
+    .card-body {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-body h3 {
+      font-size: 1.8rem;
+      margin: 0.4rem 0 1rem 0;
+      color: var(--text-primary);
+    }
+
+    .card-body p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-action {
+      margin-top: auto;
+    }
+
+    .contact-box {
+      background: linear-gradient(180deg, rgba(18, 18, 18, 0.8) 0%, rgba(10, 10, 10, 0.95) 100%);
+      border: 1px solid var(--border-gold);
+      padding: 3.5rem;
+      text-align: center;
+      position: relative;
+      margin-top: 2rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .contact-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .contact-item i {
+      font-size: 1.5rem;
+      color: var(--accent-gold);
+    }
+
+    .contact-item span {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      word-break: break-all;
+    }
+
+    /* Estilos de la sección Tri'Novas */
+    .trinovas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .trinovas-img-wrap {
+      border: 1px solid var(--border-gold);
+      padding: 10px;
+      background: var(--bg-card);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+    }
+
+    .trinovas-img-wrap img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .trinovas-content h2 {
+      font-size: 3.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .trinovas-content ul {
+      list-style-type: disc;
+      padding-left: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .trinovas-content li {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .trinovas-buttons {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 5rem 0 2rem 0;
+      background: #050505;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .footer-copy {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .trinovas-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .footer-flex { flex-direction: column; text-align: center; }
+      .contact-box { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <header>
+    <nav>
+      <a href="#" class="logo-box">
+        <img src="logo Nova Styles.png" alt="Nova Styles Official Logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#marca">La Marca</a></li>
+        <li><a href="#certamen">Miss Nova Queen</a></li>
+        <li><a href="#coleccion">Colección</a></li>
+        <li><a href="#trinovas">Tri'Novas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="#contacto" class="btn">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="marca">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="section-tag">Agencia &amp; Casa de Moda</span>
+          <h1 class="hero-title">Estilo que trasciende la <em>pasarela.</em></h1>
+          <p class="hero-desc">
+            Nova Styles es una firma enfocada en moda, elegancia y expresión personal. Nos dedicamos a proyectar la sofisticación de vanguardia y formar a las modelos más destacadas.
+          </p>
+          <div class="hero-buttons">
+          </div>
+        </div>
+
+        <div class="hero-image-frame">
+          <img src="Giovanna y Yo.png" alt="Giovanna y Yo — Nova Styles">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <div class="ticker-item"><b>NOVA STYLES</b> Dominando las pasarelas y el mundo del modelaje</div>
+      <div class="ticker-item"><b>MISS NOVA QUEEN</b> Primer certamen de belleza oficial de Nova Styles</div>
+      <div class="ticker-item"><b>ALTA COSTURA</b> Fotografía editorial, elegancia y distinción urbana</div>
+      <div class="ticker-item"><b>NOVA STYLES</b> Dominando las pasarelas y el mundo del modelaje</div>
+    </div>
+  </div>
+
+  <section id="certamen" class="section-padding">
+    <div class="container">
+      <h2 style="font-size: 2.8rem; margin-bottom: 3rem;">L'élégance De La Riviera, Réinventée.</h2>
+
+      <div class="grid-3">
+        <!-- Tarjeta 1: Miss Nova  -->
+        <div class="card">
+          <div class="card-img-wrap" style="background-color: #050507; padding: 1rem;">
+            <img src="miss nova.png" class="card-img-contain" alt="Certamen Miss Nova Queen">
+          </div>
+          <div class="card-body">
+            <span class="section-tag">Gala de Belleza</span>
+            <h3>M I S S  N O V A  Q U E E N</h3>
+            <p>Miss Nova es el primer certamen de belleza organizado por Nova Styles, creado para encontrar a la participante que mejor represente la esencia de la marca destacando por su apariencia, personalidad, elegancia, seguridad y desenvolvimiento.</p>
+            <div class="card-action">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Identidad & Elegancia -->
+        <div class="card">
+          <div class="card-img-wrap" style="background-color: #050507; padding: 2rem;">
+            <img src="logo Nova Styles.png" class="card-img-contain" alt="Identidad Oficial Nova Styles">
+          </div>
+          <div class="card-body">
+            <span class="section-tag">Brand Heritage</span>
+            <h3>I D E N T I D A D</h3>
+            <p>Nuestra insignia representa la guía, el brillo y el vanguardismo que caracteriza a cada producción, desfile y colección bajo el sello de Nova Styles.</p>
+            <div class="card-action">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Collection -->
+        <div class="card" id="coleccion">
+          <div class="card-img-wrap" style="background-color: #050507; padding: 1rem;">
+            <img src="collections.png" class="card-img-contain" alt="Colección Exclusiva Nova Styles">
+          </div>
+          <div class="card-body">
+            <span class="section-tag">Lujo Minimalista</span>
+            <h3>C O L L E C T I O N</h3>
+            <p>Elevamos la propuesta con accesorios exclusivos, concebidos para realzar la distinción en eventos sociales y pasarela.</p>
+            <div class="card-action">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Tri'Novas -->
+  <section id="trinovas" class="section-padding">
+    <div class="container">
+      <div class="trinovas-grid">
+        <div class="trinovas-img-wrap">
+          <img src="Tri Novas.png" alt="Espacio Tri Novas">
+        </div>
+
+        <div class="trinovas-content">
+          <span class="section-tag">Elegancia & Vida Nocturna</span>
+          <h2>Tri Novas</h2>
+          <ul>
+            <li>
+              Inspirado en las tres hijas de la familia Sinclair, <strong>Tri Novas</strong> trae el espíritu festivo de Francia al corazón de Los Santos. Un espacio donde la moda, la elegancia y la vida nocturna se fusionan cada fin de semana.
+            </li>
+          </ul>
+          <div class="trinovas-buttons">
+            <!-- Botón Reservar enlazado a Discord -->
+            <a href="https://discord.gg/aYYs4rGVbj" target="_blank" rel="noopener noreferrer" class="btn btn-pill">Reservar</a>
+            <!-- Botón Conocer enlazado al Foro -->
+            <a href="https://forum.sarp.es/index.php?/topic/10974-trinovas-club-2487/" target="_blank" rel="noopener noreferrer" class="btn btn-pill">Conocer</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="section-padding">
+    <div class="container">
+      <div class="contact-box">
+        <span class="section-tag">Contacto & Enlaces Directos</span>
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Conecta con Nova Styles</h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-weight: 300;">
+          Haz clic en cualquier canal a continuación para copiar la información directamente al portapapeles.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <h4 class="font-serif" style="font-size: 1.2rem;">C O R R E O  O F I C I A L</h4>
+            <span>st0rmbo1n@discord.com</span>
+            <button class="btn btn-copy" onclick="copyToClipboard('contacto@novastyles.com', this)" style="margin-top: 0.5rem;">
+              <i class="fa-regular fa-copy"></i>
+              <span>Copiar Correo</span>
+            </button>
+          </div>
+
+          <div class="contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <h4 class="font-serif" style="font-size: 1.2rem;">S E D E  P R I N C I P A L</h4>
+            <span>2110 Olympia Avenue, Highland Avenue, Rodeo, Los Santos, San Andreas</span>
+            <button class="btn btn-copy" onclick="copyToClipboard('Nova Styles HQ - Distrito de Moda, Los Santos', this)" style="margin-top: 0.5rem;">
+              <i class="fa-regular fa-copy"></i>
+              <span>Copiar Ubicación</span>
+            </button>
+          </div>
+
+          <div class="contact-item">
+            <i class="fa-solid fa-hashtag"></i>
+            <h4 class="font-serif" style="font-size: 1.2rem;">T E L É F O N O</h4>
+            <span>(751)9476</span>
+            <button class="btn btn-copy" onclick="copyToClipboard('#NovaStyles #MissNovaQueen', this)" style="margin-top: 0.5rem;">
+              <i class="fa-regular fa-copy"></i>
+              <span>Copiar teléfono</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-flex">
+        <a href="#" class="logo-box">
+          <img src="logo Nova Styles.png" class="footer-logo" alt="Nova Styles Official Logo Footer">
+        </a>
+        <p style="color: var(--text-secondary); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          Elegancia, Moda &amp; Expresión Personal
+        </p>
+      </div>
+
+      <div class="footer-copy">
+        © 2026 Nova Styles. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function copyToClipboard(textText, btnElement) {
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = textText;
+      tempTextArea.style.position = 'fixed';
+      tempTextArea.style.top = '-9999px';
+      tempTextArea.style.left = '-9999px';
+      document.body.appendChild(tempTextArea);
+
+      tempTextArea.select();
+      tempTextArea.setSelectionRange(0, 99999);
+
+      let isSuccess = false;
+      try {
+        isSuccess = document.execCommand('copy');
+      } catch (err) {
+        console.error('Error al copiar al portapapeles:', err);
+      }
+
+      document.body.removeChild(tempTextArea);
+
+      if (isSuccess) {
+        const originalHTML = btnElement.innerHTML;
+        btnElement.classList.add('copied');
+        btnElement.innerHTML = `<i class="fa-solid fa-check"></i> <span>¡Copiado!</span>`;
+
+        showToast('Texto copiado al portapapeles');
+
+        setTimeout(() => {
+          btnElement.classList.remove('copied');
+          btnElement.innerHTML = originalHTML;
+        }, 2500);
+      }
+    }
+
+    function showToast(message) {
+      const toastContainer = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${message}</span>`;
+      
+      toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('show');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          if (toastContainer.contains(toast)) {
+            toastContainer.removeChild(toast);
+          }
+        }, 400);
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
